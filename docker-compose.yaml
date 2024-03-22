@@ -1,0 +1,38 @@
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/node.Dockerfile
+    command: npm run start
+    volumes:
+      - .:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      riksha_network:
+  db:
+        image: mariadb:latest
+        container_name: db
+        user: "root"
+        ports:
+            - "33068:3306"
+        volumes:
+            - ./:/usr/src/app
+            - ../loads_db:/var/lib/mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        networks:
+          riksha_network:
+networks:
+    riksha_network:
+        name: riksha_network
