@@ -10,13 +10,15 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  ManyToMany,
   OneToOne,
+  JoinTable,
 } from 'typeorm';
 
 @Entity('products')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   name!: string;
@@ -36,30 +38,34 @@ export class Product {
   @Column()
   slug!: string;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 2 })
   proteins!: number;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 2 })
   fats!: number;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 2 })
   carbohydrates!: number;
 
   @OneToOne(() => Discount, (discount: Discount) => discount.product)
-  discount: Discount;
+  discount?: Discount;
 
   @ManyToOne(() => Category, (category: Category) => category.products)
   category!: Category;
 
-  @OneToMany(() => Ingredient, (ingredient: Ingredient) => ingredient.product)
-  ingredients!: Ingredient[];
+  @ManyToMany(() => Ingredient)
+  @JoinTable()
+  ingredients?: Ingredient[];
 
-  @OneToMany(() => Tag, (tag: Tag) => tag.product)
-  tags: Tag[];
+  @ManyToMany(() => Tag)
+  @JoinTable()
+  tags?: Tag[];
 
-  @OneToMany(() => Variation, (variation: Variation) => variation.product)
-  variations: Variation[];
+  @ManyToMany(() => Variation)
+  @JoinTable()
+  variations?: Variation[];
 
-  @OneToMany(() => Label, (label: Label) => label.product)
-  labels: Label[];
+  @ManyToMany(() => Label)
+  @JoinTable()
+  labels?: Label[];
 }

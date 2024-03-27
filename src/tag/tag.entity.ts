@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 @Entity('tags')
 export class Tag {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   title!: string;
@@ -13,5 +13,5 @@ export class Tag {
   image!: string;
 
   @ManyToOne(() => Product, (product: Product) => product.tags)
-  product: Product;
+  product?: Product;
 }

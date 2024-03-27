@@ -4,14 +4,14 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 @Entity('ingredients')
 export class Ingredient {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ nullable: true })
   image?: string;
 
   @ManyToOne(() => Product, (product: Product) => product.ingredients)
-  product: Product;
+  product?: Product;
 }

@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 @Entity('categories')
 export class Category {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   title!: string;
@@ -13,5 +13,5 @@ export class Category {
   image!: string;
 
   @OneToMany(() => Product, (product: Product) => product.category)
-  products: Product[];
+  products?: Product[];
 }
