@@ -22,10 +22,7 @@
     "migration:generate": "npm run typeorm -- migration:generate src/database/migrations/riksha",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert",
-    "typeorm_seed": "npm run build && npx typeorm -d dist/database/seed.source.js",
-    "seed_migration:generate": "npm run typeorm_seed -- migration:generate src/database/seeders/riksha",
-    "seed_migration:run": "npm run typeorm_seed -- migration:run",
-    "seed_migration:revert": "npm run typeorm_seed -- migration:revert"
+    "seed": "TS_NODE_PROJECT=./tsconfig.json ts-node -r tsconfig-paths/register ./src/main-cli.ts seed"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -34,6 +31,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.2",
     "mysql2": "^3.9.2",
+    "nest-commander": "^3.12.5",
     "path": "^0.12.7",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",

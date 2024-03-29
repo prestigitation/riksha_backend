@@ -1,5 +1,5 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
-export const dbdatasource: DataSourceOptions = {
+export const seedSourceData: DataSourceOptions = {
   type: 'mysql',
   host: 'db',
   port: 3306,
@@ -8,10 +8,10 @@ export const dbdatasource: DataSourceOptions = {
   // Database name
   database: 'riksha',
   synchronize: false,
-  entities: ['dist/*/*.entity.js'],
-  migrations: ['dist/database/seeders/*.js'],
-  migrationsTableName: 'seeders_migrations',
+  entities: ['src/*/*.entity.ts'],
+  migrations: ['dist/database/migrations/*.js'],
+  migrationsTableName: 'product_migrations',
 };
 
-const dataSource = new DataSource(dbdatasource);
-export default dataSource;
+const seedSource = new DataSource(seedSourceData);
+export default seedSource;

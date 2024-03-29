@@ -1,5 +1,4 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { dbdatasource } from './database/data.source';
@@ -11,10 +10,15 @@ import { CategoryModule } from './category/category.module';
 import { VariationModule } from './variation/variation.module';
 import { DiscountModule } from './discount/discount.module';
 import { ComboModule } from './combo/combo.module';
+import { Category } from './category/category.entity';
+import { Product } from './product/product.entity';
+import { ProductService } from './product/product.service';
+import { ProductController } from './product/product.controller';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbdatasource),
+    TypeOrmModule.forFeature([Category, Product]),
     ProductModule,
     IngredientModule,
     LabelModule,
@@ -24,7 +28,7 @@ import { ComboModule } from './combo/combo.module';
     DiscountModule,
     ComboModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [ProductController],
+  providers: [AppService, ProductService],
 })
 export class AppModule {}

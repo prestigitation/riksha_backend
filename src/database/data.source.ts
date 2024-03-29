@@ -8,7 +8,7 @@ export const dbdatasource: DataSourceOptions = {
   // Database name
   database: 'riksha',
   synchronize: false,
-  entities: ['dist/*/*.entity.js'],
+  entities: ['dist/*/*.entity.js', 'src/*/*.entity.ts'],
   migrations: ['dist/database/migrations/*.js'],
   migrationsTableName: 'product_migrations',
 };

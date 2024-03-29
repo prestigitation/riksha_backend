@@ -1,14 +1,13 @@
-import { Category } from 'src/category/category.entity';
-import { Discount } from 'src/discount/discount.entity';
-import { Ingredient } from 'src/ingredient/ingredient.entity';
-import { Label } from 'src/label/label.entity';
-import { Tag } from 'src/tag/tag.entity';
-import { Variation } from 'src/variation/variation.entity';
+import { Category } from '../category/category.entity';
+import { Discount } from '../discount/discount.entity';
+import { Ingredient } from '../ingredient/ingredient.entity';
+import { Label } from '../label/label.entity';
+import { Tag } from '../tag/tag.entity';
+import { Variation } from '../variation/variation.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
   ManyToOne,
   ManyToMany,
   OneToOne,
@@ -51,7 +50,7 @@ export class Product {
   discount?: Discount;
 
   @ManyToOne(() => Category, (category: Category) => category.products)
-  category!: Category;
+  category!: number;
 
   @ManyToMany(() => Ingredient)
   @JoinTable()
