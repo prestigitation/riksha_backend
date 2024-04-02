@@ -50,7 +50,7 @@ export class Product {
   discount?: Discount;
 
   @ManyToOne(() => Category, (category: Category) => category.products)
-  category!: number;
+  category!: Category;
 
   @ManyToMany(() => Ingredient)
   @JoinTable()

@@ -1,4 +1,12 @@
+import { Variation } from '../variation/variation.entity';
+import { Label } from '../label/label.entity';
+import { Product } from '../product/product.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { Discount } from '../discount/discount.entity';
+import { Ingredient } from '../ingredient/ingredient.entity';
+import { Combo } from '../combo/combo.entity';
+import { Category } from '../category/category.entity';
+import { Tag } from '../tag/tag.entity';
 export const dbdatasource: DataSourceOptions = {
   type: 'mysql',
   host: 'db',
@@ -8,7 +16,7 @@ export const dbdatasource: DataSourceOptions = {
   // Database name
   database: 'riksha',
   synchronize: false,
-  entities: ['dist/*/*.entity.js', 'src/*/*.entity.ts'],
+  entities: [Product, Label, Variation, Discount, Ingredient, Combo, Category, Tag],
   migrations: ['dist/database/migrations/*.js'],
   migrationsTableName: 'product_migrations',
 };

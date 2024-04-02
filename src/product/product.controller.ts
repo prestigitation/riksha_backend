@@ -1,6 +1,7 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Req } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './product.entity';
+import { Request } from 'express';
 
 @Controller('product')
 export class ProductController {
@@ -8,7 +9,7 @@ export class ProductController {
     @Inject(ProductService) private readonly productService: ProductService,
   ) {}
   @Get()
-  async get(): Promise<Product[]> {
-    return await this.productService.get();
+  async get(@Req() request: Request): Promise<Product[]> {
+    return await this.productService.get(request.query);
   }
 }

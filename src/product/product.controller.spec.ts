@@ -21,7 +21,7 @@ describe('ProductController', () => {
     controller = module.get<ProductController>(ProductController);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     module.close();
   });
 
@@ -30,11 +30,12 @@ describe('ProductController', () => {
   });
 
   it('should have image in each given product', async () => {
-    const response = await controller.get();
+    const response = await controller.get({} as any);
     expect(response.every((product: Product) => product.image)).toBeTruthy();
   });
 
-  it('should have category filled in each given product', () => {
-    expect(true).toBeFalsy();
+  it('should have category filled in each given product', async () => {
+    const response = await controller.get({} as any);
+    expect(response.every((product: Product) => product.category)).toBeTruthy();
   });
 });

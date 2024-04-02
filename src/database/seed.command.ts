@@ -210,9 +210,9 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
       }),
     });
     if (category1) {
-      product1.category = category1!.id;
-      product2.category = category1!.id;
-      product3.category = category1!.id;
+      product1.category = category1;
+      product2.category = category1;
+      product3.category = category1;
     }
     if (labels1?.length) {
       product1.labels = labels1;

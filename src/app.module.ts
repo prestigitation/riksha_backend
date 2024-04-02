@@ -14,11 +14,13 @@ import { Category } from './category/category.entity';
 import { Product } from './product/product.entity';
 import { ProductService } from './product/product.service';
 import { ProductController } from './product/product.controller';
+import { LabelService } from './label/label.service';
+import { Label } from './label/label.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbdatasource),
-    TypeOrmModule.forFeature([Category, Product]),
+    TypeOrmModule.forFeature([Category, Product, Label]),
     ProductModule,
     IngredientModule,
     LabelModule,
@@ -29,6 +31,6 @@ import { ProductController } from './product/product.controller';
     ComboModule,
   ],
   controllers: [ProductController],
-  providers: [AppService, ProductService],
+  providers: [AppService, ProductService, LabelService],
 })
 export class AppModule {}
