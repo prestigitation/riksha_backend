@@ -16,7 +16,16 @@ export const dbdatasource: DataSourceOptions = {
   // Database name
   database: 'riksha',
   synchronize: false,
-  entities: [Product, Label, Variation, Discount, Ingredient, Combo, Category, Tag],
+  entities: [
+    Product,
+    Label,
+    Variation,
+    Discount,
+    Ingredient,
+    Combo,
+    Category,
+    Tag,
+  ],
   migrations: ['dist/database/migrations/*.js'],
   migrationsTableName: 'product_migrations',
 };
