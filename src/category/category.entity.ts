@@ -10,6 +10,9 @@ export class Category {
   title!: string;
 
   @Column()
+  slug!: string;
+
+  @Column()
   image!: string;
 
   @OneToMany(() => Product, (product: Product) => product.category)

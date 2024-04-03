@@ -16,11 +16,16 @@ import { ProductService } from './product/product.service';
 import { ProductController } from './product/product.controller';
 import { LabelService } from './label/label.service';
 import { Label } from './label/label.entity';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbdatasource),
     TypeOrmModule.forFeature([Category, Product, Label]),
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'src', 'storage'),
+    }),
     ProductModule,
     IngredientModule,
     LabelModule,

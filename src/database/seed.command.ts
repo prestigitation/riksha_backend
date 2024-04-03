@@ -27,17 +27,17 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
     const tags: Tag[] = [
       {
         title: 'Острое',
-        image: path.join(__dirname, 'src/storage/tags/spicy.png'),
+        image: '/tags/spicy.png',
       },
       {
         title: 'Горячий ролл',
-        image: path.join(__dirname, 'src/storage/tags/hot.png'),
+        image: '/tags/hot.png',
       },
     ];
     const ingredients: Ingredient[] = [
       {
         name: 'Лосось',
-        image: path.join(__dirname, 'src/storage/ingredients/salmon.png'),
+        image: '/ingredients/salmon.png',
       },
       {
         name: 'сыр "Филадельфия"',
@@ -53,43 +53,92 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
     const categories: Category[] = [
       {
         title: 'Пицца',
-        image: path.join(__dirname, 'src/storage/categories/pizza.png'),
+        image: '/categories/pizza.png',
+        slug: slugify('Пицца', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Суши',
-        image: path.join(__dirname, 'src/storage/categories/sushi.png'),
+        image: '/categories/sushi.png',
+        slug: slugify('Суши', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Роллы',
-        image: path.join(__dirname, 'src/storage/categories/rolle.png'),
+        image: '/categories/rolle.png',
+        slug: slugify('Роллы', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Сеты',
-        image: path.join(__dirname, 'src/storage/categories/set.png'),
+        image: '/categories/set.png',
+        slug: slugify('Сеты', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Wok',
-        image: path.join(__dirname, 'src/storage/categories/wok.png'),
+        image: '/categories/wok.png',
+        slug: slugify('Wok', {
+          lower: true,
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Супы',
-        image: path.join(__dirname, 'src/storage/categories/soup.png'),
+        image: '/categories/soup.png',
+        slug: slugify('Супы', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Салаты',
-        image: path.join(__dirname, 'src/storage/categories/salads.png'),
+        image: '/categories/salads.png',
+        slug: slugify('Салаты', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Десерты',
-        image: path.join(__dirname, 'src/storage/categories/dessert.png'),
+        image: '/categories/dessert.png',
+        slug: slugify('Десерты', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Напитки',
-        image: path.join(__dirname, 'src/storage/categories/drink.png'),
+        image: '/categories/drink.png',
+        slug: slugify('Напитки', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
       {
         title: 'Акции',
-        image: path.join(__dirname, 'src/storage/categories/sale.png'),
+        image: '/categories/sale.png',
+        slug: slugify('Акции', {
+          lower: true,
+          locale: 'ru',
+          remove: /[*+~.()'"!:@]/g,
+        }),
       },
     ];
 
@@ -163,10 +212,7 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
       proteins: 7.5,
       fats: 3.8,
       carbohydrates: 16.6,
-      image: path.join(
-        __dirname,
-        'src/storage/products/rolls/rolls_philadelphia.png',
-      ),
+      image: '/products/rolls/rolls_philadelphia.png',
       slug: slugify('Ролл "Филадельфия"', {
         lower: true,
         locale: 'ru',
@@ -181,10 +227,7 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
       proteins: 7.5,
       fats: 3.8,
       carbohydrates: 16.6,
-      image: path.join(
-        __dirname,
-        'src/storage/products/rolls/rolls_slivochnaya_krevetka.png',
-      ),
+      image: '/products/rolls/rolls_slivochnaya_krevetka.png',
       slug: slugify('Ролл "Сливочная креветка"', {
         lower: true,
         locale: 'ru',
@@ -199,10 +242,7 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
       proteins: 7.5,
       fats: 3.8,
       carbohydrates: 16.6,
-      image: path.join(
-        __dirname,
-        'src/storage/products/rolls/rolls_chicken_and_cheese.png',
-      ),
+      image: '/products/rolls/rolls_chicken_and_cheese.png',
       slug: slugify('Ролл "Чикен энд Чиз"', {
         lower: true,
         locale: 'ru',
