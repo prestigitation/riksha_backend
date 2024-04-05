@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import seedDataSource from '../database/seed.source';
 import { checkParams } from '../utils/main.utils';
 import dataSource from '../database/data.source';
+import { paginate, PaginateQuery } from 'nestjs-paginate';
 export interface IProductParams {
   labels?: string;
   tags?: string;
@@ -13,20 +14,25 @@ export interface IProductParams {
 @Injectable()
 export class ProductService {
   private productRepository: Repository<Product>;
-  async get(params: IProductParams): Promise<Product[]> {
+  async get(params: IProductParams, paginateQuery: PaginateQuery) {
     if (!dataSource.isInitialized) await dataSource.initialize();
     this.productRepository = await dataSource.getRepository(Product);
-    const data = await this.productRepository.find({
+    const whereOptions = [
+      ...checkParams(params?.labels ?? '', 'labels', 'title'),
+      ...checkParams(params?.tags ?? '', 'tags', 'title'),
+    ];
+
+    if (params.category) {
+      whereOptions.push({
+        category: {
+          id: params.category,
+        },
+      });
+    }
+    const data = await paginate(paginateQuery, this.productRepository, {
+      sortableColumns: ['id'],
       relations: ['labels', 'tags', 'category', 'ingredients'],
-      where: {
-        category: params?.category
-          ? {
-              id: params?.category ?? 0,
-            }
-          : null,
-        labels: checkParams(params?.labels ?? '', 'title'),
-        tags: checkParams(params?.tags ?? '', 'title'),
-      },
+      where: whereOptions,
     });
     await dataSource.destroy();
     return data;

@@ -1,8 +1,13 @@
-export function checkParams(queryParam: string, searchingBy: string) {
+export function checkParams(
+  queryParam: string,
+  entity: string,
+  searchingBy: string,
+) {
   return queryParam
     ? Array.from(queryParam.split(',')).map((property) => {
         const object = {};
-        object[searchingBy] = property;
+        object[entity] = {};
+        object[entity][searchingBy] = property;
         return object;
       })
     : [];
