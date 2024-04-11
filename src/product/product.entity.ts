@@ -12,6 +12,7 @@ import {
   ManyToMany,
   OneToOne,
   JoinTable,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('products')
@@ -47,6 +48,7 @@ export class Product {
   carbohydrates!: number;
 
   @OneToOne(() => Discount, (discount: Discount) => discount.product)
+  @JoinColumn()
   discount?: Discount;
 
   @ManyToOne(() => Category, (category: Category) => category.products)

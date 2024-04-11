@@ -8,6 +8,7 @@ import { Tag } from '../tag/tag.entity';
 import seedSource from './seed.source';
 import { Product } from '../product/product.entity';
 import slugify from 'slugify';
+import { Discount } from 'src/discount/discount.entity';
 
 @Command({
   name: 'seed',
@@ -20,6 +21,19 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
   }
   async run(): Promise<void> {
     await seedSource.initialize();
+
+    const discounts: Discount[] = [
+      {
+        discount: 219,
+      },
+      {
+        discount: 219,
+      },
+      {
+        discount: 199,
+      },
+    ];
+
     const labels: Label[] = [
       { title: 'TOP', name: 'Топ позиции' },
       { title: 'NEW', name: 'Новинки' },
@@ -147,6 +161,7 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
       { tags },
       { ingredients },
       { categories },
+      { discounts },
     ];
 
     const results = {};
@@ -203,6 +218,16 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
     });
     const category1 = await seedSource
       .getRepository(Category)
+      .findOneBy({ id: 3 });
+
+    const discount1 = await seedSource
+      .getRepository(Discount)
+      .findOneBy({ id: 1 });
+    const discount2 = await seedSource
+      .getRepository(Discount)
+      .findOneBy({ id: 2 });
+    const discount3 = await seedSource
+      .getRepository(Discount)
       .findOneBy({ id: 3 });
     const product1 = await seedSource.getRepository(Product).create({
       name: 'Ролл "Филадельфия"',
@@ -273,6 +298,15 @@ export class SeedSampleEntitiesCommand extends CommandRunner {
       product2.tags = tags2;
     }
 
+    if (discount1) {
+      product1.discount = discount1;
+    }
+    if (discount2) {
+      product2.discount = discount2;
+    }
+    if (discount3) {
+      product3.discount = discount3;
+    }
     await seedSource
       .getRepository(Product)
       .save([product1, product2, product3]);

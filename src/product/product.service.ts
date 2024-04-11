@@ -6,7 +6,7 @@ import { checkParams } from '../utils/main.utils';
 import dataSource from '../database/data.source';
 import { paginate, PaginateQuery } from 'nestjs-paginate';
 export interface IProductParams {
-  labels?: string;
+  label?: string;
   tags?: string;
   category?: number;
 }
@@ -18,7 +18,7 @@ export class ProductService {
     if (!dataSource.isInitialized) await dataSource.initialize();
     this.productRepository = await dataSource.getRepository(Product);
     const whereOptions = [
-      ...checkParams(params?.labels ?? '', 'labels', 'title'),
+      ...checkParams(params?.label ?? '', 'labels', 'title'),
       ...checkParams(params?.tags ?? '', 'tags', 'title'),
     ];
 
@@ -30,8 +30,8 @@ export class ProductService {
       });
     }
     const data = await paginate(paginateQuery, this.productRepository, {
-      sortableColumns: ['id'],
-      relations: ['labels', 'tags', 'category', 'ingredients'],
+      sortableColumns: ['id', 'tags.id', 'ingredients.id'],
+      relations: ['labels', 'tags', 'category', 'ingredients', 'discount'],
       where: whereOptions,
     });
     await dataSource.destroy();
